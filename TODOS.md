@@ -1,0 +1,3 @@
+- If loading a specific url, check that user is logged in before displaying data
+- If navbar needs to be permanent, add a marginLeft to all components in `/src/pages`
+- update name, email, and password in Settings page

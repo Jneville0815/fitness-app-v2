@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react'
+import Navbar from './components/Navbar/Navbar'
+import { Outlet } from 'react-router-dom'
+import Grid from '@mui/material/Grid'
+import Header from './components/Header/Header'
+import { useLocation } from 'react-router-dom'
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [title, setTitle] = useState(null)
+    const location = useLocation()
+
+    const [openDrawer, setOpenDrawer] = useState(false)
+
+    const handleDrawerToggle = () => {
+        setOpenDrawer(!openDrawer)
+    }
+
+    useEffect(() => {
+        const pathSegments = location.pathname.split('/')
+        const lastSegment = pathSegments[pathSegments.length - 1]
+        const parsedTitle = lastSegment.replace(/\W/g, ' ')
+        setTitle(parsedTitle)
+    }, [location])
+
+    return (
+        <Grid container>
+            <Navbar
+                variant="temporary"
+                open={openDrawer}
+                onClose={handleDrawerToggle}
+            />
+            <Header title={title} onDrawerToggle={handleDrawerToggle} />
+            <Outlet />
+        </Grid>
+    )
 }
 
-export default App;
+export default App
