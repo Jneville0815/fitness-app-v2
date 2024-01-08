@@ -46,6 +46,7 @@ const UpdateLifts = ({ maxLifts, setMaxLifts }) => {
             squatMax: data.squat,
             pressMax: data.overheadPress,
         }
+        setMaxLifts(newData)
         try {
             const response = await backend.post(
                 `/userInfo/${localStorage.getItem('user_id')}/fitness`,
@@ -59,7 +60,6 @@ const UpdateLifts = ({ maxLifts, setMaxLifts }) => {
                 }
             )
             if (response.status === 200) {
-                setMaxLifts(newData)
                 setFitnessSubmittedLabel('Updated!')
                 setFitnessSubmitted(true)
                 setTimeout(() => {
