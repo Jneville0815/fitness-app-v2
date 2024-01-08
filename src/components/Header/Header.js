@@ -20,9 +20,7 @@ const Header = ({ title, onDrawerToggle }) => {
                 </Box>
             </Box>
             <Box sx={headerStyles.middleRow}>
-                <Typography variant="h1" color="white">
-                    {title}
-                </Typography>
+                <Typography variant="h1">{title}</Typography>
             </Box>
         </Box>
     )

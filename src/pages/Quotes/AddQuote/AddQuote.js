@@ -4,6 +4,7 @@ import Box from '@mui/material/Box'
 import { globalStyles } from '../../../components/common/styles'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { colors } from '../../../components/common/colors'
 import * as Yup from 'yup'
 import TextField from '@mui/material/TextField'
 import React, { useState } from 'react'
@@ -87,7 +88,7 @@ const AddQuote = () => {
                         variant="outlined"
                         margin="dense"
                         {...register('source')}
-                        error={errors.source ? true : false}
+                        error={!!errors.source}
                         helperText={errors.source?.message}
                     />
                     <TextField
@@ -98,7 +99,7 @@ const AddQuote = () => {
                         variant="outlined"
                         margin="dense"
                         {...register('quote')}
-                        error={errors.quote ? true : false}
+                        error={!!errors.quote}
                         helperText={errors.quote?.message}
                     />
                     <CommonButton
@@ -114,8 +115,8 @@ const AddQuote = () => {
                             style={{
                                 color:
                                     quoteSubmittedLabel === 'Failed to Update'
-                                        ? 'red'
-                                        : 'green',
+                                        ? colors.red
+                                        : colors.green,
                                 marginBottom: 0,
                             }}
                         >

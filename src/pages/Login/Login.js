@@ -68,7 +68,7 @@ const Login = () => {
                 variant="outlined"
                 margin="dense"
                 {...register('email')}
-                error={errors.email ? true : false}
+                error={!!errors.email}
                 helperText={errors.email?.message}
                 sx={loginStyles.textField}
             />
@@ -78,7 +78,7 @@ const Login = () => {
                 variant="outlined"
                 margin="dense"
                 {...register('password')}
-                error={errors.password ? true : false}
+                error={!!errors.password}
                 helperText={errors.password?.message}
                 sx={loginStyles.textField}
             />

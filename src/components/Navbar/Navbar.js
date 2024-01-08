@@ -27,7 +27,7 @@ const Navbar = (props) => {
                     primary={'Jimmy Neville Fitness'}
                 />
                 <Divider />
-                {mainNavbarItems.map((item, index) => (
+                {mainNavbarItems.map((item) => (
                     <ListItem
                         key={item.id}
                         onClick={() => navigate(item.route)}

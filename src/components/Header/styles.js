@@ -1,9 +1,11 @@
+import { colors } from '../common/colors'
+
 export const headerStyles = {
     wrapper: {
         width: '100%',
         display: 'flex',
         flexDirection: 'column',
-        backgroundColor: '#009be5',
+        backgroundColor: colors.mainBlue,
         padding: '20px',
     },
     topRow: {
@@ -30,9 +32,9 @@ export const headerStyles = {
     },
     link: {
         fontWeight: 500,
-        color: 'rgba(255, 255, 255, 0.7)',
+        color: colors.fadedWhite,
         '&:hover': {
-            color: '#fff',
+            color: colors.white,
             cursor: 'pointer',
         },
     },

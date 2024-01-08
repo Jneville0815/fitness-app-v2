@@ -8,6 +8,7 @@ import CommonButton from '../../../components/common/CommonButton/CommonButton'
 import { DataGrid } from '@mui/x-data-grid'
 import Tooltip from '@mui/material/Tooltip'
 import TextField from '@mui/material/TextField'
+import { manageQuotesStyles } from './styles'
 
 const ManageQuotes = () => {
     const [allQuotes, setAllQuotes] = useState([])
@@ -78,9 +79,7 @@ const ManageQuotes = () => {
             // this is to make the column multi-line
             renderCell: (params) => (
                 <Tooltip title={params.value}>
-                    <div style={{ whiteSpace: 'normal', lineHeight: 'normal' }}>
-                        {params.value}
-                    </div>
+                    <div style={manageQuotesStyles.tooltip}>{params.value}</div>
                 </Tooltip>
             ),
         },
@@ -90,9 +89,7 @@ const ManageQuotes = () => {
             width: isMobile ? 100 : 800,
             renderCell: (params) => (
                 <Tooltip title={params.value}>
-                    <div style={{ whiteSpace: 'normal', lineHeight: 'normal' }}>
-                        {params.value}
-                    </div>
+                    <div style={manageQuotesStyles.tooltip}>{params.value}</div>
                 </Tooltip>
             ),
         },
@@ -150,10 +147,7 @@ const ManageQuotes = () => {
 
                     <CommonButton
                         variant="contained"
-                        sx={{
-                            backgroundColor: 'red!important',
-                            marginTop: '10px',
-                        }}
+                        sx={manageQuotesStyles.removeButton}
                         onClick={removeQuotes}
                     >
                         Remove Selected

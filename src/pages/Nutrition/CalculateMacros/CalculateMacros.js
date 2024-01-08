@@ -140,7 +140,7 @@ const CalculateMacros = () => {
                         variant="outlined"
                         margin="dense"
                         {...register('age')}
-                        error={errors.age ? true : false}
+                        error={!!errors.age}
                         helperText={errors.age?.message}
                     />
                     <FormControl sx={globalStyles.textField}>
@@ -150,7 +150,7 @@ const CalculateMacros = () => {
                             displayEmpty
                             {...register('sex')}
                             defaultValue=""
-                            error={errors.sex ? true : false}
+                            error={!!errors.sex}
                         >
                             <MenuItem value={0}>Male</MenuItem>
                             <MenuItem value={1}>Female</MenuItem>
@@ -163,7 +163,7 @@ const CalculateMacros = () => {
                                 label="Height (ft)"
                                 {...register('heightFeet')}
                                 defaultValue=""
-                                error={errors.heightFeet ? true : false}
+                                error={!!errors.heightFeet}
                             >
                                 <MenuItem value={4}>4</MenuItem>
                                 <MenuItem value={5}>5</MenuItem>
@@ -176,7 +176,7 @@ const CalculateMacros = () => {
                                 label="Height (in)"
                                 {...register('heightInches')}
                                 defaultValue=""
-                                error={errors.heightInches ? true : false}
+                                error={!!errors.heightInches}
                             >
                                 <MenuItem value={0}>0</MenuItem>
                                 <MenuItem value={1}>1</MenuItem>
@@ -198,7 +198,7 @@ const CalculateMacros = () => {
                         variant="outlined"
                         margin="dense"
                         {...register('weight')}
-                        error={errors.weight ? true : false}
+                        error={!!errors.weight}
                         helperText={errors.weight?.message}
                         sx={globalStyles.textField}
                     />
@@ -208,7 +208,7 @@ const CalculateMacros = () => {
                             label="Goal"
                             {...register('goal')}
                             defaultValue=""
-                            error={errors.goal ? true : false}
+                            error={!!errors.goal}
                         >
                             <MenuItem value={0}>Fat Loss</MenuItem>
                             <MenuItem value={1}>Maintenance</MenuItem>
@@ -221,7 +221,7 @@ const CalculateMacros = () => {
                             label="Activity Level"
                             {...register('activityLevel')}
                             defaultValue=""
-                            error={errors.activityLevel ? true : false}
+                            error={!!errors.activityLevel}
                         >
                             <MenuItem value={0}>None</MenuItem>
                             <MenuItem value={1}>1-3 times per week</MenuItem>

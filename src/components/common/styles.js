@@ -1,4 +1,5 @@
 import { createTheme } from '@mui/material/styles'
+import { colors } from './colors'
 
 const theme = createTheme()
 
@@ -6,7 +7,7 @@ export const globalStyles = {
     appBar: {
         zIndex: 0,
         width: '100%',
-        backgroundColor: '#009be5',
+        backgroundColor: colors.mainBlue,
         justifyContent: 'center',
         alignItems: 'center',
     },

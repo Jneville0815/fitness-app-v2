@@ -1,3 +1,5 @@
+import { colors } from '../common/colors'
+
 const drawerWidth = 220
 
 export const navbarStyles = {
@@ -7,12 +9,12 @@ export const navbarStyles = {
         '& .MuiDrawer-paper': {
             width: drawerWidth,
             boxSizing: 'border-box',
-            backgroundColor: '#101F33',
-            color: 'rgba(255,255,255,0.7)',
+            backgroundColor: colors.darkBlue,
+            color: colors.fadedWhite,
         },
     },
     icons: {
-        color: 'rgba(255, 255, 255, 0.7)!important',
+        color: colors.fadedWhite,
     },
     text: {
         '& span': {

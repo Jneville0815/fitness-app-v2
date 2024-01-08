@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import CardActions from '@mui/material/CardActions'
@@ -10,8 +10,6 @@ import { globalStyles } from '../../../components/common/styles'
 
 const Workout = ({ maxLifts }) => {
     const [counter, setCounter] = useState(0)
-
-    useEffect(() => {}, [counter])
 
     const round5 = (x) => {
         return Math.ceil(x / 5) * 5

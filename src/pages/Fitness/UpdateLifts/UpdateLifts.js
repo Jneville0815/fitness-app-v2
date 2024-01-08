@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { colors } from '../../../components/common/colors'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import Box from '@mui/material/Box'
@@ -45,7 +46,6 @@ const UpdateLifts = ({ maxLifts, setMaxLifts }) => {
             squatMax: data.squat,
             pressMax: data.overheadPress,
         }
-        setMaxLifts(newData)
         try {
             const response = await backend.post(
                 `/userInfo/${localStorage.getItem('user_id')}/fitness`,
@@ -59,6 +59,7 @@ const UpdateLifts = ({ maxLifts, setMaxLifts }) => {
                 }
             )
             if (response.status === 200) {
+                setMaxLifts(newData)
                 setFitnessSubmittedLabel('Updated!')
                 setFitnessSubmitted(true)
                 setTimeout(() => {
@@ -102,7 +103,7 @@ const UpdateLifts = ({ maxLifts, setMaxLifts }) => {
                         variant="outlined"
                         margin="dense"
                         {...register('bench')}
-                        error={errors.bench ? true : false}
+                        error={!!errors.bench}
                         helperText={errors.bench?.message}
                     />
                     <TextField
@@ -110,7 +111,7 @@ const UpdateLifts = ({ maxLifts, setMaxLifts }) => {
                         variant="outlined"
                         margin="dense"
                         {...register('overheadPress')}
-                        error={errors.overheadPress ? true : false}
+                        error={!!errors.overheadPress}
                         helperText={errors.overheadPress?.message}
                     />
                     <TextField
@@ -118,7 +119,7 @@ const UpdateLifts = ({ maxLifts, setMaxLifts }) => {
                         variant="outlined"
                         margin="dense"
                         {...register('squat')}
-                        error={errors.squat ? true : false}
+                        error={!!errors.squat}
                         helperText={errors.squat?.message}
                     />
                     <TextField
@@ -126,7 +127,7 @@ const UpdateLifts = ({ maxLifts, setMaxLifts }) => {
                         variant="outlined"
                         margin="dense"
                         {...register('deadlift')}
-                        error={errors.deadlift ? true : false}
+                        error={!!errors.deadlift}
                         helperText={errors.deadlift?.message}
                     />
                     {fitnessSubmitted && (
@@ -134,8 +135,8 @@ const UpdateLifts = ({ maxLifts, setMaxLifts }) => {
                             style={{
                                 color:
                                     fitnessSubmittedLabel === 'Failed to Update'
-                                        ? 'red'
-                                        : 'green',
+                                        ? colors.red
+                                        : colors.green,
                                 marginBottom: 0,
                             }}
                         >

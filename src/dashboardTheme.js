@@ -1,4 +1,5 @@
 import { createTheme } from '@mui/material/styles'
+import { colors } from './components/common/colors'
 
 export const dashboardTheme = createTheme({
     components: {
@@ -10,14 +11,14 @@ export const dashboardTheme = createTheme({
                     borderRadius: 8.5,
                     textTransform: 'none',
                     '&.MuiButton-contained': {
-                        backgroundColor: '#009be5',
+                        backgroundColor: colors.mainBlue,
                         '&:hover': {
-                            backgroundColor: '#006db3',
+                            backgroundColor: colors.hoverBlue,
                         },
                     },
                     '&.MuiButton-outlined': {
-                        color: '#fff',
-                        borderColor: 'rgba(255, 255, 255, 0.7)',
+                        color: colors.white,
+                        borderColor: colors.fadedWhite,
                         '&:hover': {
                             backgroundColor: 'rgba(0, 0, 0, 0.04)',
                         },
@@ -35,14 +36,14 @@ export const dashboardTheme = createTheme({
     },
     palette: {
         white: {
-            main: '#fff',
+            main: colors.white,
         },
     },
     typography: {
         h1: {
             fontSize: '1.6rem',
             fontWeight: 600,
-            color: '#fff',
+            color: colors.white,
             letterSpacing: '0.5px',
             textTransform: 'capitalize',
         },

@@ -1,3 +1,5 @@
+import { colors } from '../../components/common/colors'
+
 export const loginStyles = {
     box: {
         display: 'flex',
@@ -5,6 +7,6 @@ export const loginStyles = {
         justifyContent: 'center',
         alignItems: 'center',
     },
-    error: { color: 'red', marginBottom: 0 },
+    error: { color: colors.red, marginBottom: 0 },
     textField: { width: '25ch' },
 }

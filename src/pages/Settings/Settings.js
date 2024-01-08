@@ -21,7 +21,7 @@ const Settings = () => {
                 sx={globalStyles.appBar}
             >
                 <Tabs value={value} onChange={handleChange} textColor="inherit">
-                    <Tab label="User Settings" />
+                    <Tab label="User" />
                 </Tabs>
             </AppBar>
             <TabPanel value={value} index={0}>

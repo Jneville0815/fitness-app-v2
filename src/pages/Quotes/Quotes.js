@@ -22,8 +22,8 @@ const Quotes = () => {
                 sx={globalStyles.appBar}
             >
                 <Tabs value={value} onChange={handleChange} textColor="inherit">
-                    <Tab label="Add Quote" />
-                    <Tab label="Manage Quotes" />
+                    <Tab label="Add" />
+                    <Tab label="Manage" />
                 </Tabs>
             </AppBar>
             <TabPanel value={value} index={0}>
