@@ -14,6 +14,7 @@ import backend from '../../../api/backend'
 const UpdateLifts = ({ maxLifts, setMaxLifts }) => {
     const [fitnessSubmitted, setFitnessSubmitted] = useState(false)
     const [fitnessSubmittedLabel, setFitnessSubmittedLabel] = useState('')
+    const [loading, setLoading] = useState(true)
 
     const validationSchema = Yup.object().shape({
         bench: Yup.string()
@@ -82,79 +83,85 @@ const UpdateLifts = ({ maxLifts, setMaxLifts }) => {
         }
     }
 
-    useEffect(() => {
+    const setVals = async () => {
         setValue('bench', maxLifts['benchMax'])
         setValue('deadlift', maxLifts['deadliftMax'])
         setValue('squat', maxLifts['squatMax'])
         setValue('overheadPress', maxLifts['pressMax'])
+    }
+
+    useEffect(() => {
+        setVals().then(() => setLoading(false))
     })
 
-    return (
-        <Card>
-            <CardContent>
-                <Box
-                    component="form"
-                    sx={globalStyles.box}
-                    noValidate
-                    autoComplete="off"
-                >
-                    <TextField
-                        label="Bench"
-                        variant="outlined"
-                        margin="dense"
-                        {...register('bench')}
-                        error={!!errors.bench}
-                        helperText={errors.bench?.message}
-                    />
-                    <TextField
-                        label="Overhead Press"
-                        variant="outlined"
-                        margin="dense"
-                        {...register('overheadPress')}
-                        error={!!errors.overheadPress}
-                        helperText={errors.overheadPress?.message}
-                    />
-                    <TextField
-                        label="Squat"
-                        variant="outlined"
-                        margin="dense"
-                        {...register('squat')}
-                        error={!!errors.squat}
-                        helperText={errors.squat?.message}
-                    />
-                    <TextField
-                        label="Deadlift"
-                        variant="outlined"
-                        margin="dense"
-                        {...register('deadlift')}
-                        error={!!errors.deadlift}
-                        helperText={errors.deadlift?.message}
-                    />
-                    {fitnessSubmitted && (
-                        <p
-                            style={{
-                                color:
-                                    fitnessSubmittedLabel === 'Failed to Update'
-                                        ? colors.red
-                                        : colors.green,
-                                marginBottom: 0,
-                            }}
-                        >
-                            {fitnessSubmittedLabel}
-                        </p>
-                    )}
-                    <CommonButton
-                        variant="contained"
-                        color="primary"
-                        onClick={handleSubmit(updateLifts)}
-                        sx={globalStyles.button}
+    if (!loading)
+        return (
+            <Card>
+                <CardContent>
+                    <Box
+                        component="form"
+                        sx={globalStyles.box}
+                        noValidate
+                        autoComplete="off"
                     >
-                        Submit
-                    </CommonButton>
-                </Box>
-            </CardContent>
-        </Card>
-    )
+                        <TextField
+                            label="Bench"
+                            variant="outlined"
+                            margin="dense"
+                            {...register('bench')}
+                            error={!!errors.bench}
+                            helperText={errors.bench?.message}
+                        />
+                        <TextField
+                            label="Overhead Press"
+                            variant="outlined"
+                            margin="dense"
+                            {...register('overheadPress')}
+                            error={!!errors.overheadPress}
+                            helperText={errors.overheadPress?.message}
+                        />
+                        <TextField
+                            label="Squat"
+                            variant="outlined"
+                            margin="dense"
+                            {...register('squat')}
+                            error={!!errors.squat}
+                            helperText={errors.squat?.message}
+                        />
+                        <TextField
+                            label="Deadlift"
+                            variant="outlined"
+                            margin="dense"
+                            {...register('deadlift')}
+                            error={!!errors.deadlift}
+                            helperText={errors.deadlift?.message}
+                        />
+                        {fitnessSubmitted && (
+                            <p
+                                style={{
+                                    color:
+                                        fitnessSubmittedLabel ===
+                                        'Failed to Update'
+                                            ? colors.red
+                                            : colors.green,
+                                    marginBottom: 0,
+                                }}
+                            >
+                                {fitnessSubmittedLabel}
+                            </p>
+                        )}
+                        <CommonButton
+                            variant="contained"
+                            color="primary"
+                            onClick={handleSubmit(updateLifts)}
+                            sx={globalStyles.button}
+                        >
+                            Submit
+                        </CommonButton>
+                    </Box>
+                </CardContent>
+            </Card>
+        )
 }
 
 export default UpdateLifts

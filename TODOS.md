@@ -2,4 +2,5 @@
 - If navbar needs to be permanent, add a marginLeft to all components in `/src/pages`
 - update name, email, and password in Settings page
 - Journal entry with pictures?
-- Quote settings for time of day 
+- Quote settings for time of day
+- Daily inventory / daily questions?
