@@ -1,15 +1,22 @@
 import React, { useState, useEffect } from 'react'
 import Navbar from './components/Navbar/Navbar'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 import Grid from '@mui/material/Grid'
 import Header from './components/Header/Header'
 import { useLocation } from 'react-router-dom'
 
 function App() {
+    const navigate = useNavigate()
     const [title, setTitle] = useState(null)
     const location = useLocation()
 
     const [openDrawer, setOpenDrawer] = useState(false)
+
+    const token = localStorage.getItem('token')
+
+    if (!token) {
+        navigate('/')
+    }
 
     const handleDrawerToggle = () => {
         setOpenDrawer(!openDrawer)

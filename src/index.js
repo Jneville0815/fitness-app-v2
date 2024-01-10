@@ -17,7 +17,8 @@ root.render(
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Login />} />
-                <Route path="/home" element={<App />}>
+                <Route path="*" element={<Login />} />
+                <Route element={<App />}>
                     <Route path="fitness" element={<Fitness />} />
                     <Route path="nutrition" element={<Nutrition />} />
                     <Route path="quotes" element={<Quotes />} />

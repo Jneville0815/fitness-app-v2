@@ -43,7 +43,7 @@ const Login = () => {
                 localStorage.setItem('user_id', response.data.user_id)
                 console.log('Login Success')
                 setError(false)
-                navigate('home/fitness')
+                navigate('/fitness')
             }
         } catch (err) {
             setError(true)
@@ -56,7 +56,7 @@ const Login = () => {
         const user_id = localStorage.getItem('user_id')
 
         if (token && user_id) {
-            navigate('home/fitness')
+            navigate('/fitness')
         }
     })
 
