@@ -6,6 +6,7 @@ import Workout from './Workout/Workout'
 import UpdateLifts from './UpdateLifts/UpdateLifts'
 import { globalStyles } from '../../components/common/styles'
 import backend from '../../api/backend'
+import OneRepMaxCalc from './OneRepMaxCalc/OneRepMaxCalc'
 
 const Fitness = () => {
     const [value, setValue] = useState(0)
@@ -53,6 +54,7 @@ const Fitness = () => {
                 <Tabs value={value} onChange={handleChange} textColor="inherit">
                     <Tab label="Workout" />
                     <Tab label="Update Lifts" />
+                    <Tab label="1RM Calc" />
                 </Tabs>
             </AppBar>
             <TabPanel value={value} index={0}>
@@ -60,6 +62,9 @@ const Fitness = () => {
             </TabPanel>
             <TabPanel value={value} index={1}>
                 <UpdateLifts maxLifts={maxLifts} setMaxLifts={setMaxLifts} />
+            </TabPanel>
+            <TabPanel value={value} index={2}>
+                <OneRepMaxCalc />
             </TabPanel>
         </Grid>
     )

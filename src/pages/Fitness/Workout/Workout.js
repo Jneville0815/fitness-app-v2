@@ -8,19 +8,21 @@ import { workoutData } from './data'
 import { workoutStyles } from './styles'
 import { globalStyles } from '../../../components/common/styles'
 import backend from '../../../api/backend'
+import TextField from '@mui/material/TextField'
 
 const Workout = ({ maxLifts }) => {
     const [currentDay, setCurrentDay] = useState(0)
     const [loading, setLoading] = useState(true)
+    const [notes, setNotes] = useState('')
 
-    const updateCurrentDay = async () => {
+    const updateCurrentDay = async (day) => {
         try {
             await backend.post(
                 `/userInfo/${localStorage.getItem(
                     'user_id'
                 )}/fitness/currentDay`,
                 {
-                    currentDay: currentDay,
+                    currentDay: day,
                 },
                 {
                     headers: {
@@ -30,6 +32,7 @@ const Workout = ({ maxLifts }) => {
                     },
                 }
             )
+            setCurrentDay(day)
         } catch (err) {
             console.log(err)
         }
@@ -56,15 +59,15 @@ const Workout = ({ maxLifts }) => {
     }
 
     useEffect(() => {
-        updateCurrentDay()
-    }, [currentDay])
-
-    useEffect(() => {
         getCurrentDay().then(() => setLoading(false))
     }, [])
 
     const round5 = (x) => {
         return Math.ceil(x / 5) * 5
+    }
+
+    const handleNotes = (event) => {
+        setNotes(event.target.value)
     }
 
     if (!loading)
@@ -131,16 +134,36 @@ const Workout = ({ maxLifts }) => {
                                 </Box>
                             )}
                         </Box>
+                        <TextField
+                            variant="outlined"
+                            margin="dense"
+                            multiline
+                            rows={4}
+                            value={notes}
+                            onChange={handleNotes}
+                            fullWidth
+                        />
+                        <CommonButton
+                            variant="contained"
+                            color="primary"
+                            onClick={() => {
+                                console.log('penis')
+                            }}
+                            sx={globalStyles.button}
+                        >
+                            Save Note
+                        </CommonButton>
                     </Box>
                 </CardContent>
                 <CardActions sx={workoutStyles.buttonContainer}>
                     <CommonButton
                         variant="contained"
                         color="primary"
-                        disabled={currentDay === 0}
                         onClick={() => {
-                            if (currentDay > 0 && currentDay <= 15) {
-                                setCurrentDay(currentDay - 1)
+                            if (currentDay === 0) {
+                                updateCurrentDay(15)
+                            } else if (currentDay > 0 && currentDay <= 15) {
+                                updateCurrentDay(currentDay - 1)
                             }
                         }}
                         sx={globalStyles.button}
@@ -150,10 +173,11 @@ const Workout = ({ maxLifts }) => {
                     <CommonButton
                         variant="contained"
                         color="primary"
-                        disabled={currentDay === 15}
                         onClick={() => {
-                            if (currentDay >= 0 && currentDay < 15) {
-                                setCurrentDay(currentDay + 1)
+                            if (currentDay === 15) {
+                                updateCurrentDay(0)
+                            } else if (currentDay >= 0 && currentDay < 15) {
+                                updateCurrentDay(currentDay + 1)
                             }
                         }}
                         sx={globalStyles.button}
