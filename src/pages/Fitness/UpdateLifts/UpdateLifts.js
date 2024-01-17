@@ -10,6 +10,7 @@ import CommonButton from '../../../components/common/CommonButton/CommonButton'
 import { globalStyles } from '../../../components/common/styles'
 import * as Yup from 'yup'
 import backend from '../../../api/backend'
+import CircularProgress from '@mui/material/CircularProgress'
 
 const UpdateLifts = ({ maxLifts, setMaxLifts }) => {
     const [fitnessSubmitted, setFitnessSubmitted] = useState(false)
@@ -94,7 +95,7 @@ const UpdateLifts = ({ maxLifts, setMaxLifts }) => {
         setVals().then(() => setLoading(false))
     })
 
-    if (!loading)
+    if (!loading) {
         return (
             <Card>
                 <CardContent>
@@ -162,6 +163,13 @@ const UpdateLifts = ({ maxLifts, setMaxLifts }) => {
                 </CardContent>
             </Card>
         )
+    } else {
+        return (
+            <Box sx={globalStyles.loading}>
+                <CircularProgress />
+            </Box>
+        )
+    }
 }
 
 export default UpdateLifts

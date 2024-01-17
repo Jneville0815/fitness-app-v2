@@ -19,6 +19,12 @@ export const globalStyles = {
         padding: 2,
     },
     button: { marginTop: '25px' },
+    loading: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: '10px',
+    },
     textField: {
         width: '25ch',
         margin: theme.spacing(1),

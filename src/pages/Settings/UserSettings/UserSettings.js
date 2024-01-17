@@ -4,10 +4,12 @@ import Box from '@mui/material/Box'
 import { globalStyles } from '../../../components/common/styles'
 import backend from '../../../api/backend'
 import { useEffect, useState } from 'react'
+import CircularProgress from '@mui/material/CircularProgress'
 
 const UserSettings = () => {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
+    const [loading, setLoading] = useState(true)
 
     const getEmailAndName = async () => {
         try {
@@ -31,24 +33,32 @@ const UserSettings = () => {
     }
 
     useEffect(() => {
-        getEmailAndName()
+        getEmailAndName().then(() => setLoading(false))
     }, [])
 
-    return (
-        <Card>
-            <CardContent>
-                <Box
-                    component="form"
-                    sx={globalStyles.box}
-                    noValidate
-                    autoComplete="off"
-                >
-                    <p>Name: {name}</p>
-                    <p>Email: {email}</p>
-                </Box>
-            </CardContent>
-        </Card>
-    )
+    if (!loading) {
+        return (
+            <Card>
+                <CardContent>
+                    <Box
+                        component="form"
+                        sx={globalStyles.box}
+                        noValidate
+                        autoComplete="off"
+                    >
+                        <p>Name: {name}</p>
+                        <p>Email: {email}</p>
+                    </Box>
+                </CardContent>
+            </Card>
+        )
+    } else {
+        return (
+            <Box sx={globalStyles.loading}>
+                <CircularProgress />
+            </Box>
+        )
+    }
 }
 
 export default UserSettings

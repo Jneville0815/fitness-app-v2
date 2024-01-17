@@ -9,11 +9,15 @@ import { workoutStyles } from './styles'
 import { globalStyles } from '../../../components/common/styles'
 import backend from '../../../api/backend'
 import TextField from '@mui/material/TextField'
+import { colors } from '../../../components/common/colors'
+import CircularProgress from '@mui/material/CircularProgress'
 
 const Workout = ({ maxLifts }) => {
+    const [noteSubmitted, setNoteSubmitted] = useState(false)
+    const [noteSubmittedLabel, setNoteSubmittedLabel] = useState('')
     const [currentDay, setCurrentDay] = useState(0)
     const [loading, setLoading] = useState(true)
-    const [notes, setNotes] = useState('')
+    const [note, setNote] = useState('')
 
     const updateCurrentDay = async (day) => {
         try {
@@ -34,6 +38,62 @@ const Workout = ({ maxLifts }) => {
             )
             setCurrentDay(day)
         } catch (err) {
+            console.log(err)
+        }
+    }
+
+    const getNote = async () => {
+        try {
+            const response = await backend.get(
+                `/userInfo/${localStorage.getItem('user_id')}/fitness/note`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem(
+                            'token'
+                        )}`,
+                    },
+                }
+            )
+            setNote(response.data.note)
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    const updateNote = async () => {
+        try {
+            const response = await backend.post(
+                `/userInfo/${localStorage.getItem('user_id')}/fitness/note`,
+                {
+                    note: note,
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem(
+                            'token'
+                        )}`,
+                    },
+                }
+            )
+            if (response.status === 200) {
+                setNoteSubmittedLabel('Updated!')
+                setNoteSubmitted(true)
+                setTimeout(() => {
+                    setNoteSubmitted(false)
+                }, 2000)
+            } else {
+                setNoteSubmittedLabel('Failed to Update')
+                setNoteSubmitted(true)
+                setTimeout(() => {
+                    setNoteSubmitted(false)
+                }, 2000)
+            }
+        } catch (err) {
+            setNoteSubmittedLabel('Failed to Update')
+            setNoteSubmitted(true)
+            setTimeout(() => {
+                setNoteSubmitted(false)
+            }, 2000)
             console.log(err)
         }
     }
@@ -59,15 +119,15 @@ const Workout = ({ maxLifts }) => {
     }
 
     useEffect(() => {
-        getCurrentDay().then(() => setLoading(false))
+        getCurrentDay().then(() => getNote().then(() => setLoading(false)))
     }, [])
 
     const round5 = (x) => {
         return Math.ceil(x / 5) * 5
     }
 
-    const handleNotes = (event) => {
-        setNotes(event.target.value)
+    const handleNote = (event) => {
+        setNote(event.target.value)
     }
 
     if (!loading)
@@ -139,15 +199,29 @@ const Workout = ({ maxLifts }) => {
                             margin="dense"
                             multiline
                             rows={4}
-                            value={notes}
-                            onChange={handleNotes}
+                            value={note}
+                            onChange={handleNote}
                             fullWidth
                         />
+                        {noteSubmitted && (
+                            <p
+                                style={{
+                                    color:
+                                        noteSubmittedLabel ===
+                                        'Failed to Update'
+                                            ? colors.red
+                                            : colors.green,
+                                    marginBottom: 0,
+                                }}
+                            >
+                                {noteSubmittedLabel}
+                            </p>
+                        )}
                         <CommonButton
                             variant="contained"
                             color="primary"
                             onClick={() => {
-                                console.log('penis')
+                                updateNote()
                             }}
                             sx={globalStyles.button}
                         >
@@ -187,6 +261,13 @@ const Workout = ({ maxLifts }) => {
                 </CardActions>
             </Card>
         )
+    else {
+        return (
+            <Box sx={globalStyles.loading}>
+                <CircularProgress />
+            </Box>
+        )
+    }
 }
 
 export default Workout

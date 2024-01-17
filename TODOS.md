@@ -4,5 +4,4 @@
 - Journal entry with pictures?
 - Quote settings for time of day
 - Daily inventory / daily questions?
-- Notes at bottom of fitness. Stuff like, break bar when benching 
-- 1rm calculator
+- loading indicator on Workout page
