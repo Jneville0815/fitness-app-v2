@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const localTesting = false
+const localTesting = true
 
 export const backend_url =
     'https://ogby0w3cuj.execute-api.us-east-1.amazonaws.com/production/api'
